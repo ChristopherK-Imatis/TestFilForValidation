@@ -1,0 +1,138 @@
+﻿@page "/counter"
+@using System.Text.Json;
+@using TestFilForValidation.Data;
+
+<h1>Input validation along with reading and writing with Json</h1>
+
+Writing to a Json file, using user inputs.
+
+<div class="floatContainer">
+    <EditForm Model="newEmployee" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="Firstname">Firstname</label>
+            <InputText @bind-Value=newEmployee.Firstname class="form-control" id="Firstname" />
+
+            <label for="Lastname">Lastname</label>
+            <InputText @bind-Value=newEmployee.Lastname class="form-control" id="Lastname" />
+
+            <label for="Email">Email</label>
+            <InputText @bind-Value=newEmployee.Email class="form-control" id="Email" />
+
+            <label for="Birthday">Birthday</label>
+            <InputDate @bind-Value=newEmployee.Birthday class="form-control" id="Birthday" />
+
+            <label for="PhoneNumber">Phone number</label>
+            <InputNumber @bind-Value=newEmployee.PhoneNumber class="form-control" id="PhoneNumber" />
+
+            <label for="Sex">Sex</label>
+            <select class="selectTest" name="Sex" @bind="newEmployee.Sex">
+                @foreach (var enumValue in Enum.GetValues(typeof(Sex)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </select>
+        </div>
+
+        <div style="display: flex; align-items: center; padding-top: 5px;">
+            <input id="submitButton" type="submit" class="btn btn-primary" value="Save" />
+            <p style="margin: 0; padding-left: 5px; font-size: 16px; flex: 1;">@content</p>
+        </div>
+    </EditForm>
+</div>
+
+
+
+
+
+@code {
+    private string content = string.Empty;
+    private Employee newEmployee;
+    private Data data;
+
+    private void SetEmployeeId()
+    {
+        if (data != null && data.Employees != null)
+        {
+            newEmployee.EmployeeID = data.Employees.Count;
+        }
+        else
+        {
+            Console.Write("NOT WORKING, SETTING TO DEFAULT EMPLOYEEID VALUE");
+            newEmployee.EmployeeID = 1; // Default value if data is not properly initialized
+        }
+    }
+
+    private void ChangeContentOnValid()
+    {
+        content = "New employee added";
+    }
+
+    private void ChangeContentOnInvalid()
+    {
+        content = "Employee was not added";
+    }
+
+    private void HandleValidSubmit()
+    {
+        SetEmployeeId();
+        Console.WriteLine("Valid submit " + newEmployee.EmployeeID);
+        ChangeContentOnValid();
+        WriteToJson();
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("Invalid submit");
+        ChangeContentOnInvalid();
+    }
+
+    private void WriteToJson()
+    {
+        try
+        {
+            newEmployee.Fullname = newEmployee.Firstname + " " + newEmployee.Lastname;
+            string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
+
+            string existingJson = File.ReadAllText(jsonFilePath);
+            var existingData = JsonSerializer.Deserialize<Data>(existingJson);
+
+            existingData.Employees.Add(newEmployee);
+
+            string updatedJson = JsonSerializer.Serialize(existingData, new JsonSerializerOptions { WriteIndented = true });
+
+            File.WriteAllText(jsonFilePath, updatedJson);
+
+            Console.WriteLine($"Patient {newEmployee.Fullname} successfully added to the file.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error adding the patient to the file: " + ex.Message);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        newEmployee = new Employee();
+
+        string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
+        string existingJson = File.ReadAllText(jsonFilePath);
+        data = JsonSerializer.Deserialize<Data>(existingJson) ?? new Data();
+        if (data.Employees == null)
+        {
+            data.Employees = new List<Employee>();
+        }
+    }
+
+    private Sex selectedSex = Sex.NotSpesified;
+
+    private void OnValueChanged(ChangeEventArgs e)
+    {
+        if (Enum.TryParse<Sex>(e.Value.ToString(), out var result))
+        {
+            selectedSex = result;
+        }
+    }
+
+}

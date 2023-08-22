@@ -1,0 +1,60 @@
+﻿@page "/"
+@using System.Text.Json;
+@using TestFilForValidation.Data;
+
+<PageTitle>Index</PageTitle>
+
+<h1>Input validation along with reading and writing with Json</h1>
+
+Reading from json file, organized in a table.
+
+@if (data == null)
+{
+    <p>Data is null lol try again</p>
+}
+else
+{
+    <div class="tableWrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Birthday</th>
+                    <th>Phone number</th>
+                    <th>Sex</th>
+                </tr>
+            </thead>
+            @foreach (var employee in data.Employees)
+            {
+                <tbody>
+                    <tr>
+                        <td>@employee.Firstname</td>
+                        <td>@employee.Lastname</td>
+                        <td>@employee.Email</td>
+                        <td>@employee.Birthday</td>
+                        <td>@employee.PhoneNumber</td>
+                        <td>@employee.Sex</td>
+                        <td>
+                            <a href="edit/@employee.EmployeeID">
+                                <img src="/Images & Words/edit.png" alt="Edit" style="width: 22px; height: auto;" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+}   
+
+@code {
+    private Data data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var json = await File.ReadAllTextAsync(@"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json");
+        data = JsonSerializer.Deserialize<Data>(json);
+    }
+
+}

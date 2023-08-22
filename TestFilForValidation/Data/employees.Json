@@ -1,0 +1,154 @@
+{
+  "Employees": [
+    {
+      "Firstname": "Alice",
+      "Lastname": "Johnson",
+      "Fullname": null,
+      "Email": "alice.johnson@example.com",
+      "Birthday": "1985-05-15T00:00:00",
+      "PhoneNumber": 987654321,
+      "Sex": 2,
+      "EmployeeID": 0
+    },
+    {
+      "Firstname": "Bob",
+      "Lastname": "Smith",
+      "Fullname": null,
+      "Email": "bob.smith@example.com",
+      "Birthday": "1992-10-20T00:00:00",
+      "PhoneNumber": 123456789,
+      "Sex": 1,
+      "EmployeeID": 1
+    },
+    {
+      "Firstname": "Christopher",
+      "Lastname": "Kittilsen",
+      "Fullname": "Christopher Kittilsen",
+      "Email": "2005christopher@gmail.com",
+      "Birthday": "2005-07-31T00:00:00",
+      "PhoneNumber": 98137358,
+      "Sex": 1,
+      "EmployeeID": 2
+    },
+    {
+      "Firstname": "Andr\u00E9",
+      "Lastname": "Kittilsen",
+      "Fullname": "Andr\u00E9 Kittilsen",
+      "Email": "2003Andre@gmail.com",
+      "Birthday": "2003-01-02T00:00:00",
+      "PhoneNumber": 99887766,
+      "Sex": 1,
+      "EmployeeID": 3
+    },
+    {
+      "Firstname": "Cecilia",
+      "Lastname": "Kittilsen",
+      "Fullname": "Cecilia Kittilsen",
+      "Email": "Cecilia@hotmail.com",
+      "Birthday": "1972-09-21T00:00:00",
+      "PhoneNumber": 47288999,
+      "Sex": 2,
+      "EmployeeID": 4
+    },
+    {
+      "Firstname": "Nils-Petter",
+      "Lastname": "Kittilsen",
+      "Fullname": "Nils-Petter Kittilsen",
+      "Email": "NilsPK@hotmail.com",
+      "Birthday": "1970-03-08T00:00:00",
+      "PhoneNumber": 11223344,
+      "Sex": 1,
+      "EmployeeID": 5
+    },
+    {
+      "Firstname": "Aqua",
+      "Lastname": "Conure",
+      "Fullname": "Aqua Conure",
+      "Email": "AquaConure@gmail.com",
+      "Birthday": "2022-08-11T00:00:00",
+      "PhoneNumber": 75628395,
+      "Sex": 2,
+      "EmployeeID": 6
+    },
+    {
+      "Firstname": "David",
+      "Lastname": "Lee",
+      "Fullname": null,
+      "Email": "david.lee@example.com",
+      "Birthday": "1990-03-25T00:00:00",
+      "PhoneNumber": 876543210,
+      "Sex": 1,
+      "EmployeeID": 7
+    },
+    {
+      "Firstname": "Emily",
+      "Lastname": "Miller",
+      "Fullname": null,
+      "Email": "emily.miller@example.com",
+      "Birthday": "1988-11-10T00:00:00",
+      "PhoneNumber": 987612345,
+      "Sex": 2,
+      "EmployeeID": 8
+    },
+    {
+      "Firstname": "George",
+      "Lastname": "Brown",
+      "Fullname": null,
+      "Email": "george.brown@example.com",
+      "Birthday": "1977-07-02T00:00:00",
+      "PhoneNumber": 555123456,
+      "Sex": 1,
+      "EmployeeID": 9
+    },
+    {
+      "Firstname": "Hannah",
+      "Lastname": "Williams",
+      "Fullname": null,
+      "Email": "hannah.williams@example.com",
+      "Birthday": "1995-09-15T00:00:00",
+      "PhoneNumber": 456789012,
+      "Sex": 2,
+      "EmployeeID": 10
+    },
+    {
+      "Firstname": "Isaac",
+      "Lastname": "Johnson",
+      "Fullname": null,
+      "Email": "isaac.johnson@example.com",
+      "Birthday": "1983-04-30T00:00:00",
+      "PhoneNumber": 234567890,
+      "Sex": 1,
+      "EmployeeID": 11
+    },
+    {
+      "Firstname": "Jessica",
+      "Lastname": "Davis",
+      "Fullname": null,
+      "Email": "jessica.davis@example.com",
+      "Birthday": "1998-12-05T00:00:00",
+      "PhoneNumber": 345678901,
+      "Sex": 2,
+      "EmployeeID": 12
+    },
+    {
+      "Firstname": "Kevin",
+      "Lastname": "Smith",
+      "Fullname": null,
+      "Email": "kevin.smith@example.com",
+      "Birthday": "1982-06-20T00:00:00",
+      "PhoneNumber": 987654321,
+      "Sex": 1,
+      "EmployeeID": 13
+    },
+    {
+      "Firstname": "Jason",
+      "Lastname": "Baltimore",
+      "Fullname": "Jason Baltimore",
+      "Email": "Baltimore@gmail.com",
+      "Birthday": "2001-10-13T00:00:00",
+      "PhoneNumber": 93866578,
+      "Sex": 0,
+      "EmployeeID": 14
+    }
+  ]
+}

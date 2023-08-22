@@ -1,0 +1,100 @@
+﻿@page "/edit/{employeeId}"
+
+@using TestFilForValidation.Data
+@inject IEmployeeService EmployeeService
+
+<h1>Edit Employee @employee.Lastname</h1>
+
+@if (employee != null)
+{
+    <div class="floatContainer">
+        <EditForm Model="employee" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label for="Firstname">Firstname</label>
+                <InputText @bind-Value=employee.Firstname class="form-control" id="Firstname" />
+
+                <label for="Lastname">Lastname</label>
+                <InputText @bind-Value=employee.Lastname class="form-control" id="Lastname" />
+
+                <label for="Email">Email</label>
+                <InputText @bind-Value=employee.Email class="form-control" id="Email" />
+
+                <label for="Birthday">Birthday</label>
+                <InputDate @bind-Value=employee.Birthday class="form-control" id="Birthday" />
+
+                <label for="PhoneNumber">Phone number</label>
+                <InputNumber @bind-Value=employee.PhoneNumber class="form-control" id="PhoneNumber" />
+
+                <label for="Sex">Sex</label>
+                <select class="selectTest" name="Sex" @bind="employee.Sex">
+                    @foreach (var enumValue in Enum.GetValues(typeof(Sex)))
+                    {
+                        <option value="@enumValue">@enumValue</option>
+                    }
+                </select>
+            </div>
+
+            <div style="display: flex; align-items: center; padding-top: 5px;">
+                <input id="submitButton" type="submit" class="btn btn-primary" value="Save" />
+                <p style="margin: 0; padding-left: 5px; font-size: 16px; flex: 1;">@content</p>
+            </div>
+        </EditForm>
+    </div>
+}
+else
+{
+    <p>There was an error, please try again.</p>
+}
+
+@code {
+    private string content = string.Empty;
+
+    private void ChangeContentOnValid()
+    {
+        content = "New employee added";
+    }
+
+    private void ChangeContentOnInvalid()
+    {
+        content = "Employee was not added";
+    }
+
+
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("Valid submit");
+        ChangeContentOnValid();
+        //WriteToJson();
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Console.WriteLine("Invalid submit");
+        ChangeContentOnInvalid();
+    }
+
+
+    [Parameter] public string employeeId { get; set; }
+    private Employee employee;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrEmpty(employeeId))
+        {
+            int id = Convert.ToInt32(employeeId);
+            employee = await EmployeeService.GetEmployeeById(id);
+        }
+    }
+
+    private async Task UpdateEmployee()
+    {
+        if (employee != null)
+        {
+            await EmployeeService.UpdateEmployee(employee);
+            // You can navigate back to the overview page or perform other actions after updating
+        }
+    }
+}
