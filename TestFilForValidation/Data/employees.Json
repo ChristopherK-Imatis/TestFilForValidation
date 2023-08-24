@@ -21,56 +21,6 @@
       "EmployeeID": 1
     },
     {
-      "Firstname": "Christopher",
-      "Lastname": "Kittilsen",
-      "Fullname": "Christopher Kittilsen",
-      "Email": "2005christopher@gmail.com",
-      "Birthday": "2005-07-31T00:00:00",
-      "PhoneNumber": 98137358,
-      "Sex": 1,
-      "EmployeeID": 2
-    },
-    {
-      "Firstname": "Andr\u00E9",
-      "Lastname": "Kittilsen",
-      "Fullname": "Andr\u00E9 Kittilsen",
-      "Email": "2003Andre@gmail.com",
-      "Birthday": "2003-01-02T00:00:00",
-      "PhoneNumber": 99887766,
-      "Sex": 1,
-      "EmployeeID": 3
-    },
-    {
-      "Firstname": "Cecilia",
-      "Lastname": "Kittilsen",
-      "Fullname": "Cecilia Kittilsen",
-      "Email": "Cecilia@hotmail.com",
-      "Birthday": "1972-09-21T00:00:00",
-      "PhoneNumber": 47288999,
-      "Sex": 2,
-      "EmployeeID": 4
-    },
-    {
-      "Firstname": "Nils-Petter",
-      "Lastname": "Kittilsen",
-      "Fullname": "Nils-Petter Kittilsen",
-      "Email": "NilsPK@hotmail.com",
-      "Birthday": "1970-03-08T00:00:00",
-      "PhoneNumber": 11223344,
-      "Sex": 1,
-      "EmployeeID": 5
-    },
-    {
-      "Firstname": "Aqua",
-      "Lastname": "Conure",
-      "Fullname": "Aqua Conure",
-      "Email": "AquaConure@gmail.com",
-      "Birthday": "2022-08-11T00:00:00",
-      "PhoneNumber": 75628395,
-      "Sex": 2,
-      "EmployeeID": 6
-    },
-    {
       "Firstname": "David",
       "Lastname": "Lee",
       "Fullname": null,
