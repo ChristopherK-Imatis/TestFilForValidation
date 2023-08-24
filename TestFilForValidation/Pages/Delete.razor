@@ -1,0 +1,32 @@
+﻿@page "/delete/{employeeId}"
+@using TestFilForValidation.Data;
+@using System.Text.Json;
+@inject IEmployeeService EmployeeService
+
+
+<h1>Delete Employee @employee.Lastname</h1>
+
+
+Yahaha, you found me!
+
+@code {
+    private Data data;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var json = await File.ReadAllTextAsync(@"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json");
+        data = JsonSerializer.Deserialize<Data>(json);
+    }
+
+    [Parameter] public string employeeId { get; set; }
+    private Employee employee;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrEmpty(employeeId))
+        {
+            int id = Convert.ToInt32(employeeId);
+            employee = await EmployeeService.GetEmployeeById(id);
+        }
+    }
+}

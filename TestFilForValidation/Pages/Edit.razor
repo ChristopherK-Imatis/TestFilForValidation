@@ -2,6 +2,8 @@
 
 @using TestFilForValidation.Data
 @inject IEmployeeService EmployeeService
+@using System.Text.Json;
+
 
 <h1>Edit Employee @employee.Lastname</h1>
 
@@ -53,12 +55,12 @@ else
 
     private void ChangeContentOnValid()
     {
-        content = "New employee added";
+        content = "Employee has been edited";
     }
 
     private void ChangeContentOnInvalid()
     {
-        content = "Employee was not added";
+        content = "Employee was not edited";
     }
 
 
@@ -67,7 +69,7 @@ else
     {
         Console.WriteLine("Valid submit");
         ChangeContentOnValid();
-        //WriteToJson();
+        WriteToJson();
     }
 
     private void HandleInvalidSubmit()
@@ -75,6 +77,57 @@ else
         Console.WriteLine("Invalid submit");
         ChangeContentOnInvalid();
     }
+
+    private void WriteToJson()
+    {
+        try
+        {
+            string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
+
+            string jsonContent = File.ReadAllText(jsonFilePath);
+            var jsonData = JsonSerializer.Deserialize<Data>(jsonContent); //Make json into objects :)
+
+            if (jsonData != null && jsonData.Employees != null)
+            {
+                //Get employee by id
+                var existingEmployee = jsonData.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
+                if (existingEmployee != null)
+                {
+
+                    foreach (var propertyInfo in typeof(Employee).GetProperties())
+                    {
+                        var newValue = propertyInfo.GetValue(employee);
+                        propertyInfo.SetValue(existingEmployee, newValue);
+                    }
+
+                    ////Update values
+                    //existingEmployee.Firstname = employee.Firstname;
+                    //existingEmployee.Lastname = employee.Lastname;
+
+                    //Shove them back into json
+                    string updatedJson = JsonSerializer.Serialize(jsonData, new JsonSerializerOptions { WriteIndented = true });
+
+                    File.WriteAllText(jsonFilePath, updatedJson);
+
+                    Console.WriteLine($"Employee {employee.Fullname} successfully updated in the JSON file.");
+                }
+                else
+                {
+                    Console.WriteLine($"Employee with ID {employee.EmployeeID} not found in the JSON file.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Employee data is missing or null.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error updating the employee in the JSON file: " + ex.Message);
+        }
+    }
+
+
 
 
     [Parameter] public string employeeId { get; set; }
@@ -89,12 +142,5 @@ else
         }
     }
 
-    private async Task UpdateEmployee()
-    {
-        if (employee != null)
-        {
-            await EmployeeService.UpdateEmployee(employee);
-            // You can navigate back to the overview page or perform other actions after updating
-        }
-    }
+   
 }

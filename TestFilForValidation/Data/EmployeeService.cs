@@ -39,16 +39,6 @@ namespace TestFilForValidation.Data
             return employees.FirstOrDefault(e => e.EmployeeID == id);
         }
 
-        public async Task UpdateEmployee(Employee employee)
-        {
-            var existingEmployee = employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
-            if (existingEmployee != null)
-            {
-                // Update the employee's properties
-                existingEmployee.Firstname = employee.Firstname;
-                existingEmployee.Lastname = employee.Lastname;
-                // Update other properties as needed
-            }
-        }
+        
     }
 }
