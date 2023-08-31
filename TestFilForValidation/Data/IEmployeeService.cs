@@ -10,5 +10,6 @@ namespace TestFilForValidation.Data
     public interface IEmployeeService
     {
         Task<Employee> GetEmployeeById(int id);
+        Task DeleteEmployee(int employeeId);
     }
 }

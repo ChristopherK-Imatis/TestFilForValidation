@@ -24,6 +24,8 @@ else
                     <th>Birthday</th>
                     <th>Phone number</th>
                     <th>Sex</th>
+                    <th class="secondLastColumn" style="text-align: center;">Edit</th>
+                    <th class="lastColumn" style="text-align: center;">Del</th>
                 </tr>
             </thead>
             @foreach (var employee in data.Employees)
@@ -36,12 +38,12 @@ else
                         <td>@employee.Birthday</td>
                         <td>@employee.PhoneNumber</td>
                         <td>@employee.Sex</td>
-                        <td>
+                        <td class="secondLastColumn">
                             <a href="edit/@employee.EmployeeID">
                                 <img src="/Images & Words/edit.png" alt="Edit" style="width: 22px; height: auto;" />
                             </a>
                         </td>
-                        <td>
+                        <td class="lastColumn">
                             <a href="delete/@employee.EmployeeID">
                                 <img src="/Images & Words/delete.png" alt="Edit" style="width: 22px; height: auto;" />
                             </a>

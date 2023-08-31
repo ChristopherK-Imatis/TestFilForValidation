@@ -96,6 +96,46 @@ th {
     width: 948px;
 }
 
+.tableWrapper2 {
+    margin-top: 10px;
+    border: 2px solid grey;
+    height: 215px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 5px;
+    width: 600px;
+}
+
+th {
+    text-align: left;
+    background: lightgray;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+
+.firstColumn {
+    width: 300px;
+    height: 100%;
+}
+
+.secondColumn {
+    text-align: right;
+    width: 300px;
+}
+
+.secondLastColumn {
+    position: sticky;
+    right: 55px;
+    background-color: #eee;
+}
+
+.lastColumn {
+    position: sticky;
+    right: 0;
+    background-color: #eee;
+}
+
 .floatContainer {
     border: 3px solid #fff;
     padding: 20px;
