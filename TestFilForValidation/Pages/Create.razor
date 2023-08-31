@@ -7,39 +7,42 @@
 Writing to a Json file, using user inputs.
 
 <div class="floatContainer">
-    <EditForm Model="newEmployee" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
-        <DataAnnotationsValidator />
+    @if (newEmployee != null)
+    {
+        <EditForm Model="newEmployee" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+            <DataAnnotationsValidator />
 
-        <div class="form-group">
-            <label for="Firstname">Firstname</label>
-            <InputText @bind-Value=newEmployee.Firstname class="form-control" id="Firstname" />
+            <div class="form-group">
+                <label for="Firstname">Firstname</label>
+                <InputText @bind-Value=newEmployee.Firstname class="form-control" id="Firstname" />
 
-            <label for="Lastname">Lastname</label>
-            <InputText @bind-Value=newEmployee.Lastname class="form-control" id="Lastname" />
+                <label for="Lastname">Lastname</label>
+                <InputText @bind-Value=newEmployee.Lastname class="form-control" id="Lastname" />
 
-            <label for="Email">Email</label>
-            <InputText @bind-Value=newEmployee.Email class="form-control" id="Email" />
+                <label for="Email">Email</label>
+                <InputText @bind-Value=newEmployee.Email class="form-control" id="Email" />
 
-            <label for="Birthday">Birthday</label>
-            <InputDate @bind-Value=newEmployee.Birthday class="form-control" id="Birthday" />
+                <label for="Birthday">Birthday</label>
+                <InputDate @bind-Value=newEmployee.Birthday class="form-control" id="Birthday" />
 
-            <label for="PhoneNumber">Phone number</label>
-            <InputNumber @bind-Value=newEmployee.PhoneNumber class="form-control" id="PhoneNumber" />
+                <label for="PhoneNumber">Phone number</label>
+                <InputNumber @bind-Value=newEmployee.PhoneNumber class="form-control" id="PhoneNumber" />
 
-            <label for="Sex">Sex</label>
-            <select class="selectTest" name="Sex" @bind="newEmployee.Sex">
-                @foreach (var enumValue in Enum.GetValues(typeof(Sex)))
-                {
-                    <option value="@enumValue">@enumValue</option>
-                }
-            </select>
-        </div>
+                <label for="Sex">Sex</label>
+                <select class="selectTest" name="Sex" @bind="newEmployee.Sex">
+                    @foreach (var enumValue in Enum.GetValues(typeof(Sex)))
+                    {
+                        <option value="@enumValue">@enumValue</option>
+                    }
+                </select>
+            </div>
 
-        <div style="display: flex; align-items: center; padding-top: 5px;">
-            <input id="submitButton" type="submit" class="btn btn-primary" value="Save" />
-            <p style="margin: 0; padding-left: 5px; font-size: 16px; flex: 1;">@content</p>
-        </div>
-    </EditForm>
+            <div style="display: flex; align-items: center; padding-top: 5px;">
+                <input id="submitButton" type="submit" class="btn btn-primary" value="Save" />
+                <p style="margin: 0; padding-left: 5px; font-size: 16px; flex: 1;">@content</p>
+            </div>
+        </EditForm>
+    }
 </div>
 
 
@@ -75,6 +78,21 @@ Writing to a Json file, using user inputs.
         }
     }
 
+    public void HandleValidSubmit()
+    {
+        if (newEmployee != null)
+        {
+            SetEmployeeId();
+            Console.WriteLine("Valid submit " + newEmployee.EmployeeID);
+            ChangeContentOnValid();
+            WriteToJson();
+        }
+        else
+        {
+            Console.WriteLine("newEmployee is null. Unable to submit.");
+        }
+    }
+
 
     private void ChangeContentOnValid()
     {
@@ -84,14 +102,6 @@ Writing to a Json file, using user inputs.
     private void ChangeContentOnInvalid()
     {
         content = "Employee was not added";
-    }
-
-    public void HandleValidSubmit()
-    {
-        SetEmployeeId();
-        Console.WriteLine("Valid submit " + newEmployee?.EmployeeID);
-        ChangeContentOnValid();
-        WriteToJson();
     }
 
     public void HandleInvalidSubmit()
