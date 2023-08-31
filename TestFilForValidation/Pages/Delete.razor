@@ -19,7 +19,7 @@
                 <td class="secondColumn">@employee.Lastname</td>
             </tr>
             <tr>
-                <td class="firstColumn">Lastname</td>
+                <td class="firstColumn">Email</td>
                 <td class="secondColumn">@employee.Email</td>
             </tr>
             <tr>
@@ -42,10 +42,10 @@
 
 
 @code {
-    private Data data;
-    private Employee employee;
+    private Data? data;
+    private Employee? employee;
 
-    [Parameter] public string employeeId { get; set; }
+    [Parameter] public string? employeeId { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {

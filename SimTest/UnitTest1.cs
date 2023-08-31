@@ -8,7 +8,7 @@ namespace SimTest
     public class CreateTests
     {
         [TestMethod]
-        public void TestValidationLogic_EmptyFirstName_ShouldFail()
+        public void TestValidationLogic_EmptyFields_ShouldFail()
         {
             //Arrange
             var page = new Create();

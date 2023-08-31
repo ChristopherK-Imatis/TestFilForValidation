@@ -48,29 +48,33 @@ Writing to a Json file, using user inputs.
 
 @code {
     private string content = string.Empty;
-    private Employee newEmployee;
-    private Data data;
+    private Employee? newEmployee;
+    private Data? data;
     public int newId;
 
     private void SetEmployeeId()
     {
-        if (data != null && data.Employees != null)
+        if (newEmployee != null)
         {
-            @foreach (var employee in data.Employees)
+            if (data != null && data.Employees != null)
             {
-                if (employee.EmployeeID > newId)
+                foreach (var employee in data.Employees)
                 {
-                    newId = employee.EmployeeID;
+                    if (employee.EmployeeID > newId)
+                    {
+                        newId = employee.EmployeeID;
+                    }
                 }
+                newEmployee.EmployeeID = newId + 1;
             }
-            newEmployee.EmployeeID = newId + 1;
-        }
-        else
-        {
-            Console.Write("NOT WORKING, SETTING TO DEFAULT VALUE");
-            newEmployee.EmployeeID = 1; //Default setting is infact 1.
+            else
+            {
+                Console.WriteLine("NOT WORKING, SETTING TO DEFAULT VALUE");
+                newEmployee.EmployeeID = 1;
+            }
         }
     }
+
 
     private void ChangeContentOnValid()
     {
@@ -81,44 +85,45 @@ Writing to a Json file, using user inputs.
     {
         content = "Employee was not added";
     }
-        //could make it bool
+
     public void HandleValidSubmit()
     {
         SetEmployeeId();
-        Console.WriteLine("Valid submit " + newEmployee.EmployeeID);
+        Console.WriteLine("Valid submit " + newEmployee?.EmployeeID);
         ChangeContentOnValid();
         WriteToJson();
-        //bool validationResult = true;
-
-        //return validationResult;
     }
-        //could make it bool
+
     public void HandleInvalidSubmit()
     {
         Console.WriteLine("Invalid submit");
         ChangeContentOnInvalid();
-        //bool validationResult = false;
-
-        //return validationResult;
     }
 
     private void WriteToJson()
     {
         try
         {
-            newEmployee.Fullname = newEmployee.Firstname + " " + newEmployee.Lastname;
-            string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
+            if (newEmployee != null)
+            {
+                newEmployee.Fullname = newEmployee.Firstname + " " + newEmployee.Lastname;
+                string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
 
-            string existingJson = File.ReadAllText(jsonFilePath);
-            var existingData = JsonSerializer.Deserialize<Data>(existingJson);
+                string existingJson = File.ReadAllText(jsonFilePath);
+                var existingData = JsonSerializer.Deserialize<Data>(existingJson);
 
-            existingData.Employees.Add(newEmployee);
+                existingData?.Employees.Add(newEmployee);
 
-            string updatedJson = JsonSerializer.Serialize(existingData, new JsonSerializerOptions { WriteIndented = true });
+                string updatedJson = JsonSerializer.Serialize(existingData, new JsonSerializerOptions { WriteIndented = true });
 
-            File.WriteAllText(jsonFilePath, updatedJson);
+                File.WriteAllText(jsonFilePath, updatedJson);
 
-            Console.WriteLine($"Patient {newEmployee.Fullname} successfully added to the file.");
+                Console.WriteLine($"Patient {newEmployee.Fullname} successfully added to the file.");
+            }
+            else
+            {
+                Console.WriteLine("newEmployee is null. Unable to add.");
+            }
         }
         catch (Exception ex)
         {
@@ -126,7 +131,8 @@ Writing to a Json file, using user inputs.
         }
     }
 
-    protected override async Task OnInitializedAsync()
+
+    protected override void OnInitialized()
     {
         newEmployee = new Employee();
 
@@ -143,7 +149,7 @@ Writing to a Json file, using user inputs.
 
     private void OnValueChanged(ChangeEventArgs e)
     {
-        if (Enum.TryParse<Sex>(e.Value.ToString(), out var result))
+        if (Enum.TryParse<Sex>(e?.Value?.ToString(), out var result))
         {
             selectedSex = result;
         }

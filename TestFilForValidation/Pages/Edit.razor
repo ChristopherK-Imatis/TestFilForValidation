@@ -130,8 +130,8 @@ else
 
 
 
-    [Parameter] public string employeeId { get; set; }
-    private Employee employee;
+    [Parameter] public string? employeeId { get; set; }
+    private Employee? employee;
 
     protected override async Task OnParametersSetAsync()
     {

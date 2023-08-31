@@ -23,8 +23,8 @@ namespace TestFilForValidation.Data
 
             try
             {
-                string jsonContent = File.ReadAllText(jsonFilePath);
-                Data data = JsonSerializer.Deserialize<Data>(jsonContent);
+                string? jsonContent = File.ReadAllText(jsonFilePath);
+                Data? data = JsonSerializer.Deserialize<Data>(jsonContent);
                 employees = data.Employees;
                 Console.WriteLine(employees.Count + " employees loaded");
             }
@@ -40,11 +40,11 @@ namespace TestFilForValidation.Data
             return employees.FirstOrDefault(e => e.EmployeeID == id);
         }
 
-        public async Task DeleteEmployee(int employeeId)
+        public void DeleteEmployee(int employeeId)
         {
             try
             {
-                Employee EmployeeToDelete = employees.FirstOrDefault(e => e.EmployeeID == employeeId);
+                Employee? EmployeeToDelete = employees.FirstOrDefault(e => e.EmployeeID == employeeId);
 
                 if (EmployeeToDelete != null)
                 {
@@ -66,6 +66,7 @@ namespace TestFilForValidation.Data
                 Console.WriteLine("Error deleting the employee from the JSON file: " + ex.Message);
             }
         }
+
 
 
     }

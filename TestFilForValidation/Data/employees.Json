@@ -1,7 +1,7 @@
 {
   "Employees": [
     {
-      "Firstname": "Aliceon",
+      "Firstname": "Alice",
       "Lastname": "Johnson",
       "Fullname": null,
       "Email": "alice.johnson@example.com",
@@ -99,6 +99,16 @@
       "PhoneNumber": 93847657,
       "Sex": 1,
       "EmployeeID": 14
+    },
+    {
+      "Firstname": "Hugh",
+      "Lastname": "Jackson",
+      "Fullname": "Hugh Jackson",
+      "Email": "Jackson@gmail.com",
+      "Birthday": "1999-06-30T00:00:00",
+      "PhoneNumber": 13475687,
+      "Sex": 1,
+      "EmployeeID": 15
     }
   ]
 }
