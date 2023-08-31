@@ -3,23 +3,49 @@
 @using System.Text.Json;
 @inject IEmployeeService EmployeeService
 
+<h1>Are you sure you want to delete @employee.Firstname @employee.Lastname?</h1>
 
-<h1>Delete Employee @employee.Lastname</h1>
+@employee.Firstname @employee.Lastname's info
 
+<div class="tableWrapper2">
+    <table>
+        <tbody>
+            <tr>
+                <td class="firstColumn">Firstname</td>
+                <td class="secondColumn">@employee.Firstname</td>
+            </tr>
+            <tr>
+                <td class="firstColumn">Lastname</td>
+                <td class="secondColumn">@employee.Lastname</td>
+            </tr>
+            <tr>
+                <td class="firstColumn">Lastname</td>
+                <td class="secondColumn">@employee.Email</td>
+            </tr>
+            <tr>
+                <td class="firstColumn">Birthday</td>
+                <td class="secondColumn">@employee.Birthday</td>
+            </tr>
+            <tr>
+                <td class="firstColumn">Phone number</td>
+                <td class="secondColumn">@employee.PhoneNumber</td>
+            </tr>
+            <tr>
+                <td class="firstColumn">Sex</td>
+                <td class="secondColumn">@employee.Sex</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-Yahaha, you found me!
+<a href="/"><button style="margin-top: 5px;" class="btn btn-danger" @onclick="DeleteEmployee">Delete Employee</button></a>
+
 
 @code {
     private Data data;
-
-    protected override async Task OnInitializedAsync()
-    {
-        var json = await File.ReadAllTextAsync(@"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json");
-        data = JsonSerializer.Deserialize<Data>(json);
-    }
+    private Employee employee;
 
     [Parameter] public string employeeId { get; set; }
-    private Employee employee;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -27,6 +53,18 @@ Yahaha, you found me!
         {
             int id = Convert.ToInt32(employeeId);
             employee = await EmployeeService.GetEmployeeById(id);
+        }
+    }
+
+    private async Task DeleteEmployee()
+    {
+        if (employee != null)
+        {
+            await EmployeeService.DeleteEmployee(employee.EmployeeID);
+        }
+        else
+        {
+            Console.WriteLine("Woah there pardner. Calm down, this shit ain't working quite yet.");
         }
     }
 }

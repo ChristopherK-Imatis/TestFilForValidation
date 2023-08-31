@@ -50,17 +50,25 @@ Writing to a Json file, using user inputs.
     private string content = string.Empty;
     private Employee newEmployee;
     private Data data;
+    public int newId;
 
     private void SetEmployeeId()
     {
         if (data != null && data.Employees != null)
         {
-            newEmployee.EmployeeID = data.Employees.Count;
+            @foreach (var employee in data.Employees)
+            {
+                if (employee.EmployeeID > newId)
+                {
+                    newId = employee.EmployeeID;
+                }
+            }
+            newEmployee.EmployeeID = newId + 1;
         }
         else
         {
-            Console.Write("NOT WORKING, SETTING TO DEFAULT EMPLOYEEID VALUE");
-            newEmployee.EmployeeID = 1; // Default value if data is not properly initialized
+            Console.Write("NOT WORKING, SETTING TO DEFAULT VALUE");
+            newEmployee.EmployeeID = 1; //Default setting is infact 1.
         }
     }
 
@@ -73,19 +81,25 @@ Writing to a Json file, using user inputs.
     {
         content = "Employee was not added";
     }
-
-    private void HandleValidSubmit()
+        //could make it bool
+    public void HandleValidSubmit()
     {
         SetEmployeeId();
         Console.WriteLine("Valid submit " + newEmployee.EmployeeID);
         ChangeContentOnValid();
         WriteToJson();
-    }
+        //bool validationResult = true;
 
-    private void HandleInvalidSubmit()
+        //return validationResult;
+    }
+        //could make it bool
+    public void HandleInvalidSubmit()
     {
         Console.WriteLine("Invalid submit");
         ChangeContentOnInvalid();
+        //bool validationResult = false;
+
+        //return validationResult;
     }
 
     private void WriteToJson()

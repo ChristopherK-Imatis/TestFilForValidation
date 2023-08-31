@@ -9,6 +9,7 @@ namespace TestFilForValidation.Data
 {
     public class EmployeeService : IEmployeeService
     {
+        string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
         private List<Employee> employees;
 
         public EmployeeService()
@@ -18,7 +19,7 @@ namespace TestFilForValidation.Data
 
         private void LoadEmployeesFromJsonFile()
         {
-            string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
+            
 
             try
             {
@@ -39,6 +40,33 @@ namespace TestFilForValidation.Data
             return employees.FirstOrDefault(e => e.EmployeeID == id);
         }
 
-        
+        public async Task DeleteEmployee(int employeeId)
+        {
+            try
+            {
+                Employee EmployeeToDelete = employees.FirstOrDefault(e => e.EmployeeID == employeeId);
+
+                if (EmployeeToDelete != null)
+                {
+                    employees.Remove(EmployeeToDelete);
+
+                    string updatedJson = JsonSerializer.Serialize(new Data { Employees = employees }, new JsonSerializerOptions { WriteIndented = true });
+
+                    File.WriteAllText(jsonFilePath, updatedJson);
+
+                    Console.WriteLine($"Employee {EmployeeToDelete.Fullname} successfully deleted from the JSON file.");
+                }
+                else
+                {
+                    Console.WriteLine($"Employee with ID {employeeId} not found in the JSON file.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting the employee from the JSON file: " + ex.Message);
+            }
+        }
+
+
     }
 }
