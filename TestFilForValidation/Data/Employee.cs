@@ -5,15 +5,15 @@ namespace TestFilForValidation.Data
     public class Employee
     {
         [Required]
-        public string Firstname { get; set; }
+        public string? Firstname { get; set; }
 
         [Required]
-        public string Lastname { get; set; }
+        public string? Lastname { get; set; }
 
-        public string Fullname { get; set; }
+        public string? Fullname { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Required]
         public DateTime? Birthday { get; set; }

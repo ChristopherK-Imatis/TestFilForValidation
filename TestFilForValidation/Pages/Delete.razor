@@ -3,36 +3,36 @@
 @using System.Text.Json;
 @inject IEmployeeService EmployeeService
 
-<h1>Are you sure you want to delete @employee.Firstname @employee.Lastname?</h1>
+<h1>Are you sure you want to delete @employee?.Firstname @employee?.Lastname?</h1>
 
-@employee.Firstname @employee.Lastname's info
+@employee?.Firstname @employee?.Lastname's info
 
 <div class="tableWrapper2">
     <table>
         <tbody>
             <tr>
                 <td class="firstColumn">Firstname</td>
-                <td class="secondColumn">@employee.Firstname</td>
+                <td class="secondColumn">@employee?.Firstname</td>
             </tr>
             <tr>
                 <td class="firstColumn">Lastname</td>
-                <td class="secondColumn">@employee.Lastname</td>
+                <td class="secondColumn">@employee?.Lastname</td>
             </tr>
             <tr>
                 <td class="firstColumn">Email</td>
-                <td class="secondColumn">@employee.Email</td>
+                <td class="secondColumn">@employee?.Email</td>
             </tr>
             <tr>
                 <td class="firstColumn">Birthday</td>
-                <td class="secondColumn">@employee.Birthday</td>
+                <td class="secondColumn">@employee?.Birthday</td>
             </tr>
             <tr>
                 <td class="firstColumn">Phone number</td>
-                <td class="secondColumn">@employee.PhoneNumber</td>
+                <td class="secondColumn">@employee?.PhoneNumber</td>
             </tr>
             <tr>
                 <td class="firstColumn">Sex</td>
-                <td class="secondColumn">@employee.Sex</td>
+                <td class="secondColumn">@employee?.Sex</td>
             </tr>
         </tbody>
     </table>

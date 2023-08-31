@@ -122,7 +122,7 @@ Writing to a Json file, using user inputs.
                 string existingJson = File.ReadAllText(jsonFilePath);
                 var existingData = JsonSerializer.Deserialize<Data>(existingJson);
 
-                existingData?.Employees.Add(newEmployee);
+                existingData?.Employees?.Add(newEmployee);
 
                 string updatedJson = JsonSerializer.Serialize(existingData, new JsonSerializerOptions { WriteIndented = true });
 

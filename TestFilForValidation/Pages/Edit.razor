@@ -5,7 +5,7 @@
 @using System.Text.Json;
 
 
-<h1>Edit Employee @employee.Lastname</h1>
+<h1>Edit Employee @employee?.Lastname</h1>
 
 @if (employee != null)
 {
@@ -90,7 +90,7 @@ else
             if (jsonData != null && jsonData.Employees != null)
             {
                 //Get employee by id
-                var existingEmployee = jsonData.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
+                var existingEmployee = jsonData.Employees.FirstOrDefault(e => e.EmployeeID == employee?.EmployeeID);
                 if (existingEmployee != null)
                 {
 
@@ -100,7 +100,7 @@ else
                         propertyInfo.SetValue(existingEmployee, newValue);
                     }
 
-                    ////Update values
+                    //Updateing values manually
                     //existingEmployee.Firstname = employee.Firstname;
                     //existingEmployee.Lastname = employee.Lastname;
 
@@ -109,11 +109,11 @@ else
 
                     File.WriteAllText(jsonFilePath, updatedJson);
 
-                    Console.WriteLine($"Employee {employee.Fullname} successfully updated in the JSON file.");
+                    Console.WriteLine($"Employee {employee?.Fullname} successfully updated in the JSON file.");
                 }
                 else
                 {
-                    Console.WriteLine($"Employee with ID {employee.EmployeeID} not found in the JSON file.");
+                    Console.WriteLine($"Employee with ID {employee?.EmployeeID} not found in the JSON file.");
                 }
             }
             else

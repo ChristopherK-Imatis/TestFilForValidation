@@ -29,28 +29,31 @@ else
                     <th class="lastColumn" style="text-align: center;">Del</th>
                 </tr>
             </thead>
-            @foreach (var employee in data.Employees)
+            @if (data.Employees != null)
             {
-                <tbody>
-                    <tr>
-                        <td>@employee.Firstname</td>
-                        <td>@employee.Lastname</td>
-                        <td>@employee.Email</td>
-                        <td>@employee.Birthday</td>
-                        <td>@employee.PhoneNumber</td>
-                        <td>@employee.Sex</td>
-                        <td class="secondLastColumn">
-                            <a href="edit/@employee.EmployeeID">
-                                <img src="/Images & Words/edit.png" alt="Edit" style="width: 22px; height: auto;" />
-                            </a>
-                        </td>
-                        <td class="lastColumn">
-                            <a href="delete/@employee.EmployeeID">
-                                <img src="/Images & Words/delete.png" alt="Edit" style="width: 22px; height: auto;" />
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
+                @foreach (var employee in data.Employees)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@employee.Firstname</td>
+                            <td>@employee.Lastname</td>
+                            <td>@employee.Email</td>
+                            <td>@employee.Birthday</td>
+                            <td>@employee.PhoneNumber</td>
+                            <td>@employee.Sex</td>
+                            <td class="secondLastColumn">
+                                <a href="edit/@employee.EmployeeID">
+                                    <img src="/Images & Words/edit.png" alt="Edit" style="width: 22px; height: auto;" />
+                                </a>
+                            </td>
+                            <td class="lastColumn">
+                                <a href="delete/@employee.EmployeeID">
+                                    <img src="/Images & Words/delete.png" alt="Edit" style="width: 22px; height: auto;" />
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
             }
         </table>
     </div>
