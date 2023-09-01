@@ -50,12 +50,12 @@ Writing to a Json file, using user inputs.
 
 
 @code {
-    private string content = string.Empty;
-    private Employee? newEmployee;
-    private Data? data;
+    public string content = string.Empty;
+    public Employee? newEmployee;
+    public Data? data;
     public int newId;
 
-    private void SetEmployeeId()
+    public void SetEmployeeId()
     {
         if (newEmployee != null)
         {
@@ -145,7 +145,6 @@ Writing to a Json file, using user inputs.
     protected override void OnInitialized()
     {
         newEmployee = new Employee();
-
         string jsonFilePath = @"C:\Users\herman.kittilsen\source\repos\TestFilForValidation\TestFilForValidation\Data\employees.Json";
         string existingJson = File.ReadAllText(jsonFilePath);
         data = JsonSerializer.Deserialize<Data>(existingJson) ?? new Data();
@@ -153,6 +152,11 @@ Writing to a Json file, using user inputs.
         {
             data.Employees = new List<Employee>();
         }
+    }
+
+    public async Task InitializeDataForTestingAsync()
+    {
+        await OnInitializedAsync();
     }
 
     private Sex selectedSex = Sex.NotSpesified;
