@@ -15,15 +15,25 @@ namespace SimTest
         {
             //Arrange
             var sut = new Create();
-            var testData = new Data();
-            testData.Employees = new List<Employee>
+            var testData = new Data
+            {
+                Employees = new List<Employee>
             {
                     new Employee { EmployeeID = 1 },
                     new Employee { EmployeeID = 2 },
-                    new Employee { EmployeeID = 3 },
-                    new Employee { EmployeeID = 4 },
                     new Employee { EmployeeID = 5 }
+            }
             };
+
+            //Arrange
+            //var sut = new Create();
+            //var testData = new Data();
+            //testData.Employees = new List<Employee>
+            //{
+            //        new Employee { EmployeeID = 1 },
+            //        new Employee { EmployeeID = 2 },
+            //        new Employee { EmployeeID = 5 }
+            //};
 
             sut.data = testData;
             sut.newEmployee= new Employee();
